@@ -115,6 +115,7 @@ def inference(input_tensor,train,regularizer):
         if train:
             fc1 = tf.nn.dropout(fc1,0.5)
 
+
     #########第六层全连接，输入为一组512的向量，输出为一组10的向量。这一层的输出通过softMax 就可以得到最后的分类结果
     with tf.variable_scope('layer6-fc2'):
         fc2_weight = tf.get_variable(

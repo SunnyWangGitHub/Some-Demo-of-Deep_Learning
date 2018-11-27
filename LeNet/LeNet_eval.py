@@ -17,16 +17,16 @@ EVAL_INTERVAL_SECS = 10
 def evaluate(mnist):
     with tf.Graph().as_default() as g:
         x = tf.placeholder(tf.float32,
-                           [mnist.test.num_examples,
+                           [mnist.validation.num_examples,
                             LeNet_Inference.IMAGE_SIZE,
                             LeNet_Inference.IMAGE_SIZE,
                             LeNet_Inference.NUM_CHANNELS
                             ],
                            name='x-input')
         y_ = tf.placeholder(tf.float32, [None, LeNet_Inference.OUTPUT_NODE], name='y-input')
-        reshaped_xs = np.reshape(mnist.test.images, (mnist.test.num_examples, LeNet_Inference.IMAGE_SIZE, LeNet_Inference.IMAGE_SIZE, LeNet_Inference.NUM_CHANNELS))
+        reshaped_xs = np.reshape(mnist.validation.images, (mnist.validation.num_examples, LeNet_Inference.IMAGE_SIZE, LeNet_Inference.IMAGE_SIZE, LeNet_Inference.NUM_CHANNELS))
         validate_feed = {x:reshaped_xs,
-                         y_:mnist.test.labels}
+                         y_:mnist.validation.labels}
 
         y = LeNet_Inference.inference(x,False,None)
 

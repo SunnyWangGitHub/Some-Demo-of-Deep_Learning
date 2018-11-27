@@ -15,14 +15,14 @@ EVAL_INTERVAL_SECS = 10
 
 def evaluate(mnist):
     with tf.Graph().as_default() as g:
-        x = tf.placeholder(tf.float32,[None,MNIST_Inference.INPUT_NODE],name = 'x-input')
-        y_ = tf.placeholder(tf.float32,[None,MNIST_Inference.OUTPUT_NODE],name = 'y-input')
+        x = tf.placeholder(tf.float32,[None,784],name = 'x-input')
+        y_ = tf.placeholder(tf.float32,[None,10],name = 'y-input')
         validate_feed = {x:mnist.validation.images,
                          y_:mnist.validation.labels}
 
         y = MNIST_Inference.inference(x,None)
 
-        correct_prediction = tf.equal(tf.arg_max(y,1),tf.argmax(y_,1))
+        correct_prediction = tf.equal(tf.argmax(y,1),tf.argmax(y_,1))
         accuarcy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
 
         ###############???
